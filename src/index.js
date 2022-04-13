@@ -1,14 +1,14 @@
 import Random from "./random.js";
 // Creating the sketch itself
 const sketch = (p5) => {
-    let xspacing = 16; // Distance between each horizontal location
+    let xspacing = 10; // Distance between each horizontal location
     let w; // Width of entire wave
     let theta = 0.0; // Start angle at 0
-    let amplitude = 30.0; // Height of wave
-    let period = 400.0; // How many pixels before the wave repeats
+    let amplitude = 25.0; // Height of wave
+    let period = 40.0; // How many pixels before the wave repeats
     let dx; // Value for incrementing x
     let yvalues; // Using an array to store height values for the wave
-    let block_height = 3;
+    let block_height = 2;
     let bg_color = 'white';
     let colorCounter = 5;
 
@@ -18,7 +18,7 @@ const sketch = (p5) => {
         // relax
         [ '#FDF8E2','#FFDDD3','#F3BFB3','#5EA9BE','#9ACDE0','#CBE1EF' ],
         // sporty candy
-        [ '#4F008E','#CD0BA9','#FF8331','#F2DD15','#2E2DE8' ]
+        [ '#4F008E','#CD0BA9','#FF8331','#F2DD15','#2E2DE8' ],
     ];
 
 	p5.setup = () => {
@@ -28,7 +28,7 @@ const sketch = (p5) => {
 
         w = p5.width + xspacing;
 
-        period = r.random_num(2, 5) * 100;
+        period = r.random_num(1, 3) * 100;
         // random PI
         dx = (p5.PI / period) * xspacing;
         yvalues = new Array(Math.floor(w / xspacing));
@@ -58,8 +58,11 @@ const sketch = (p5) => {
     const renderWave = () => {
         // var startColor = p5.color(r.random_int(100, 255), r.random_int(100, 255), r.random_int(100, 255));
         // var endColor = p5.color(r.random_int(100, 255), r.random_int(100, 255), r.random_int(100, 255));
-        var startColor = p5.color(r.random_choice(r.random_choice(colorPattern)));
-        var endColor = p5.color(r.random_choice(r.random_choice(colorPattern)));
+        var cp = r.random_choice(colorPattern);
+        var startColor = p5.color(cp[0]); //p5.color(r.random_choice(r.random_choice(colorPattern)));
+
+
+        var endColor = p5.color(cp[cp.length -1]); //p5.color(r.random_choice(r.random_choice(colorPattern)));
         var rand_case = r.random_int(0, 3);
         
         // A simple way to draw the wave with an ellipse at each location
